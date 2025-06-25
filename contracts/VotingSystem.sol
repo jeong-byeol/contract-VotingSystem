@@ -2,8 +2,7 @@
 pragma solidity ^0.8.28;
 
 contract VotingSystem {
-    address owner;
-    
+    address owner;   
 
     uint public totalVoteCount; //모든 시즌 투표수 
     uint public currentSeason; //시즌1부터 시작
@@ -41,7 +40,7 @@ contract VotingSystem {
 
     // 시즌 시작 함수
     function startNewSeason() public {
-        require(owner == msg.sender,"You don't have permission");
+        require(owner == msg.sender,"You don't have permission"); //배포자만 시즌 시작 가능
         currentSeason++;
         emit SeasonStarted(currentSeason);
     }
@@ -68,8 +67,8 @@ contract VotingSystem {
        
         v.vote = _candidateId;//투표자가 투표한 사람
         v.limitvote++; 
-        s.candidates[_candidateId].voteCount++; //뽑힌 지원자 투표수 업
-        s.voteCount++; //해당 시즌 총 투표수 업
+        s.candidates[_candidateId].voteCount++; //뽑힌 지원자 투표수 up
+        s.voteCount++; //해당 시즌 총 투표수 up
         totalVoteCount++; 
 
         emit VoteCasted(msg.sender, _candidateId, currentSeason); //해당 시즌에 대한 투표 정보 로그에 저장
